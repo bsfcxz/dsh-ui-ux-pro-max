@@ -19,3 +19,11 @@
 # Generated or vendored content is excluded from language statistics.
 package-lock.json linguist-generated=true
 pnpm-lock.yaml linguist-generated=true
+
+# The bundled skills are third-party vendored content, not this project's
+# source. Excluding them from GitHub's language detection keeps the repository
+# reported as the JavaScript plugin it actually is, rather than "Python".
+skills/** linguist-vendored=true linguist-generated=true
+skills/**/*.py linguist-detectable=false
+skills/**/*.csv linguist-detectable=false
+skills/**/*.json linguist-detectable=false
