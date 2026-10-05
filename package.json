@@ -1,0 +1,58 @@
+{
+  "name": "dsh-ui-ux-pro-max",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness 插件：当请求涉及 UI/UX 时，自动加载 ui-ux-pro-max 设计智能技能。",
+  "type": "module",
+  "displayName": "UI/UX Pro Max 自动技能",
+  "icon": "./icon.svg",
+  "license": "MIT",
+  "author": "1357980024",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "ui",
+    "ux",
+    "design",
+    "skill",
+    "ui-ux-pro-max"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1357980024/dsh-ui-ux-pro-max.git"
+  },
+  "homepage": "https://github.com/1357980024/dsh-ui-ux-pro-max#readme",
+  "bugs": {
+    "url": "https://github.com/1357980024/dsh-ui-ux-pro-max/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tests/test-trigger.mjs && node tests/test-plugin.mjs",
+    "test:trigger": "node tests/test-trigger.mjs",
+    "test:plugin": "node tests/test-plugin.mjs"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./trigger": "./trigger.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "trigger.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale",
+    "tests",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

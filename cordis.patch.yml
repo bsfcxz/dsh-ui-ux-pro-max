@@ -1,0 +1,11 @@
+# Register the UI/UX Pro Max auto-invocation plugin.
+#
+# When a step's direct user input mentions UI/UX, the plugin loads the
+# `ui-ux-pro-max` skill and splices its body into that same step, so the model
+# receives the design intelligence without first calling the `skill` tool.
+#
+# Toggle in Settings -> Plugins. Disabling this bundle stops the automatic
+# injection; the `skill` tool and the `/ui-ux-pro-max` gesture keep working.
+- insert:
+    - id: ui-ux-pro-max-auto
+      name: 'dsh-ui-ux-pro-max'

@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# DSH profile machinery (never commit profile state)
+.dsh/
+profiles/
+
+# Editor and OS noise
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs and local scratch
+*.log
+npm-debug.log*
+pnpm-debug.log*
+_tmp/
+scratch/
+
+# Secrets — this repo must never carry credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
