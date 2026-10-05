@@ -3,7 +3,7 @@
 > 让 DeepSeek Harness 在你提到 UI/UX 时，**自动加载** ui-ux-pro-max 设计智能技能。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![DSH Plugin](https://img.shields.io/badge/DeepSeek%20Harness-plugin-blue)](https://github.com/1357980024)
+[![DSH Plugin](https://img.shields.io/badge/DeepSeek%20Harness-plugin-blue)](https://github.com/bsfcxz)
 [![Tests](https://img.shields.io/badge/tests-66%20passing-brightgreen)](#-测试)
 
 [English](#english) · [简体中文](#-简介)
@@ -64,13 +64,32 @@ DSH 的 `skill` 工具已经能让模型加载技能，但**前提是模型自�
 ### 前置条件
 
 1. **DeepSeek Harness** 已安装；
-2. **ui-ux-pro-max 技能** 已安装到 `~/.dsh/skills/`（插件只负责「自动触发」，技能本体需另行安装）；
+2. **ui-ux-pro-max 技能** 已安装到 `~/.dsh/skills/`
+   （✅ 本仓库已内置，见下方安装步骤；插件只负责「自动触发」，技能本体需就位）；
 3. 当前 Profile 的 `skill-filesystem` 提供者处于启用状态。
 
 <details>
-<summary><b>还没装 ui-ux-pro-max 技能？点这里展开</b></summary>
+<summary><b>还没装 ui-ux-pro-max 技能？点这里展开（推荐用仓库内置的）</b></summary>
 
-DSH 会扫描 `~/.dsh/skills/`（用户级）与 `~/.agents/skills/`（Agent 通用级）两个目录。
+**本仓库已内置全部 7 个技能包**（`skills/` 目录，172 个文件，约 4.08 MB），
+所以最省事的方式是直接把它们复制到 DSH 的用户级技能目录：
+
+```bash
+# 克隆后执行（假设克隆到 ~/.dsh/plugins/dsh-ui-ux-pro-max）
+mkdir -p ~/.dsh/skills
+cp -r ~/.dsh/plugins/dsh-ui-ux-pro-max/skills/* ~/.dsh/skills/
+```
+
+确认技能可被加载：
+
+```bash
+ls ~/.dsh/skills/ui-ux-pro-max/SKILL.md
+```
+
+<details>
+<summary>改用官方 CLI 安装上游最新版（可选）</summary>
+
+仓库内置的是上游 v2.x 快照，不会自动同步。想用最新版：
 
 ```bash
 # 1. 全局安装官方 CLI
@@ -92,11 +111,7 @@ mv .agents/skills/* ~/.dsh/skills/
 > 虽然 DSH 也会扫描该目录，但路径里的 `python3 ~/.agents/skills/...` 在
 > Windows 上不可用。放到 `~/.dsh/skills/` 更稳妥。
 
-确认技能可被加载：
-
-```bash
-ls ~/.dsh/skills/ui-ux-pro-max/SKILL.md
-```
+</details>
 
 </details>
 
@@ -104,22 +119,24 @@ ls ~/.dsh/skills/ui-ux-pro-max/SKILL.md
 
 直接把下面这句话发给你的 DSH：
 
-> 请把 https://github.com/1357980024/dsh-ui-ux-pro-max 这个仓库克隆下来，
-> 然后用 `plugin_manager` 的 `install_bundle` 安装它。
+> 请把 https://github.com/bsfcxz/dsh-ui-ux-pro-max 这个仓库克隆到
+> `~/.dsh/plugins/dsh-ui-ux-pro-max`，把仓库里 `skills/` 下的技能复制到
+> `~/.dsh/skills/`，然后用 `plugin_manager` 的 `install_bundle` 安装它。
 
-DSH 会自行完成克隆与安装（`install_bundle` 会处理包安装与 bundle 选择，无需手工改 profile）。
+DSH 会自行完成克隆、技能复制与安装（`install_bundle` 会处理包安装与 bundle 选择，无需手工改 profile）。
 
-### 方式二：手动安装
+### 方式二：手动安装（两条命令）
 
 ```bash
 # 1. 克隆到插件目录（与其它 DSH 插件放在一起）
-git clone https://github.com/1357980024/dsh-ui-ux-pro-max.git \
+git clone https://github.com/bsfcxz/dsh-ui-ux-pro-max.git \
   ~/.dsh/plugins/dsh-ui-ux-pro-max
 ```
 
 ```bash
-# 2. 在 DSH 中安装该 bundle
-#    对你的 DSH 说：
+# 2. 复制内置技能 + 安装 bundle
+mkdir -p ~/.dsh/skills && cp -r ~/.dsh/plugins/dsh-ui-ux-pro-max/skills/* ~/.dsh/skills/
+#    然后对你的 DSH 说：
 #    「用 plugin_manager install_bundle 安装
 #      ~/.dsh/plugins/dsh-ui-ux-pro-max」
 ```
@@ -131,8 +148,9 @@ git clone https://github.com/1357980024/dsh-ui-ux-pro-max.git \
 便于改代码后立即生效：
 
 ```bash
-git clone https://github.com/1357980024/dsh-ui-ux-pro-max.git
+git clone https://github.com/bsfcxz/dsh-ui-ux-pro-max.git
 cd dsh-ui-ux-pro-max
+mkdir -p ~/.dsh/skills && cp -r ./skills/* ~/.dsh/skills/
 
 # 然后让 DSH 用 install_bundle 指向这个目录的绝对路径
 ```
@@ -281,9 +299,19 @@ dsh-ui-ux-pro-max/
 ├── locale/
 │   ├── zh.json           # 中文标题与描述
 │   └── en.json           # 英文标题与描述
+├── skills/               # 📦 内置的 7 个技能包（第三方，MIT，见声明）
+│   ├── ui-ux-pro-max/    # 主体：79 风格 / 192 配色 / 74 字体配对 / 22 技术栈
+│   ├── design/           # Logo、CIP、图标、社交图
+│   ├── design-system/    # 设计令牌、幻灯片生成
+│   ├── ui-styling/       # shadcn/ui + Tailwind
+│   ├── brand/            # 品牌语汇与一致性
+│   ├── banner-design/    # 横幅设计
+│   └── slides/           # HTML 演示文稿
 ├── tests/
 │   ├── test-trigger.mjs
 │   └── test-plugin.mjs
+├── THIRD-PARTY-NOTICES.md
+├── CHANGELOG.md
 ├── LICENSE
 └── README.md
 ```
@@ -336,12 +364,17 @@ skills 是**被动**的——需要模型主动调用。插件能监听事件、
 
 ## 🙏 致谢
 
-- 技能本体来自 [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)（MIT），本仓库**不包含**该技能的任何数据文件；
+- 技能本体（`skills/` 目录下的 7 个技能包）来自
+  [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，
+  作者 Next Level Builder，MIT 许可证。**本仓库仅按其许可证再分发**，
+  并做了最小化路径适配——详见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)；
 - 插件机制参考 DSH 自带的 `cordis-plugin-development` 技能与 `tool-skill` 实现。
 
 ## 📄 许可证
 
-[MIT](LICENSE)
+- **本插件代码**（`index.js`、`trigger.js` 等）：[MIT](LICENSE)
+- **`skills/` 目录**：第三方内容，MIT，版权归 Next Level Builder，
+  条款见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 ---
 
@@ -367,20 +400,34 @@ host's own renderer.
 
 ### Install
 
-```bash
-# 0. The skill itself must be installed first
-npm install -g ui-ux-pro-max-cli
-uipro init --ai universal          # writes ./.agents/skills/
-mv .agents/skills/* ~/.dsh/skills/  # DSH scans this root
+The 7 skill packages are **bundled in this repo** (`skills/`, ~4.08 MB), so
+installation is self-contained:
 
+```bash
 # 1. Clone the plugin
-git clone https://github.com/1357980024/dsh-ui-ux-pro-max.git \
+git clone https://github.com/bsfcxz/dsh-ui-ux-pro-max.git \
   ~/.dsh/plugins/dsh-ui-ux-pro-max
 
-# 2. Ask your DSH to install the bundle:
+# 2. Install the bundled skills into the root DSH scans
+mkdir -p ~/.dsh/skills
+cp -r ~/.dsh/plugins/dsh-ui-ux-pro-max/skills/* ~/.dsh/skills/
+
+# 3. Ask your DSH to install the bundle:
 #    "Use plugin_manager install_bundle on
 #     ~/.dsh/plugins/dsh-ui-ux-pro-max"
 ```
+
+Prefer the upstream latest instead of the bundled snapshot?
+
+```bash
+npm install -g ui-ux-pro-max-cli
+uipro init --ai universal           # writes ./.agents/skills/
+mv .agents/skills/* ~/.dsh/skills/  # DSH scans this root
+```
+
+> Do **not** use `uipro init --ai universal --global`: it targets
+> `~/.agents/skills/`, whose generated paths hardcode `python3`, which is
+> unusable on Windows.
 
 ### Usage
 
@@ -418,5 +465,6 @@ Harness.
 
 ### License
 
-[MIT](LICENSE). This repo bundles **no** ui-ux-pro-max data files; install the
-skill separately.
+- **Plugin code** (`index.js`, `trigger.js`, …): [MIT](LICENSE)
+- **`skills/` directory**: third-party content under MIT, © Next Level Builder.
+  See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

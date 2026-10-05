@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 本项目的所有重要变更都会记录在此文件。
 
@@ -38,4 +38,4 @@
   可回放、可 fork，并由官方渲染器输出。
 - 本仓库**不包含** ui-ux-pro-max 技能的任何数据文件，技能需另行安装。
 
-[1.0.0]: https://github.com/1357980024/dsh-ui-ux-pro-max/releases/tag/v1.0.0
+[1.0.0]: https://github.com/bsfcxz/dsh-ui-ux-pro-max/releases/tag/v1.0.0

@@ -2,6 +2,15 @@
 node_modules/
 .pnpm-store/
 
+# Python bytecode caches (the bundled skill scripts regenerate these on run)
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
 # DSH profile machinery (never commit profile state)
 .dsh/
 profiles/
